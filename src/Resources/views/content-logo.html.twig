@@ -1,0 +1,8 @@
+{% set _name  = name is defined ? name ~ '[logo]' : '{{ data.name }}[logo]' %}
+{% set _value = value is defined ? value : '' %}
+
+<select name="{{ _name }}">
+    {% for l, logo in logos %}
+        <option value="{{ l }}"{{ _value == l ? ' selected' : '' }}>{{ logo }}</option>
+    {% endfor %}
+</select>

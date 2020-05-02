@@ -1,0 +1,108 @@
+{% extends template_path %}
+
+{% block id %}{{ identifier }}{% endblock %}
+{% block label %}<label>{{ title|raw }}</label>{% endblock %}
+
+{% block field %}
+    <div id="{{ identifier }}-header" class="dionysos-field header {{ mode }}">
+        <input type="hidden" name="{{ name }}" value="" />
+
+        {% for id, header in headers %}
+            {% set _id     = identifier ~ '-' ~ id %}
+            {% set _name   = name ~ '[' ~ id ~ ']' %}
+            {% set _status = header.active is defined and header.active == true ? ' checked' : '' %}
+
+            <div class="zeus-cols manage-menus {{ id }}" data-h="{{ id }}" data-n="{{ _name ~ '[contents][]' }}">
+                <input type="checkbox" id="{{ _id }}-active" name="{{ _name }}[active]" value="1"{{ _status }} class="enable" />
+                <label for="{{ _id }}-active" class="track"></label>
+
+                <span class="header-title">{{ attribute(_context, 't_header_' ~ id) }}</span>
+
+                <div class="hide-if-no-js submitbox">
+                    <button type="button" class="zeus-btn add-button has-icon" aria-label="{{ t_addblock_label|raw }}">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" role="img" aria-hidden="true" focusable="false"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6zM10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg>
+                    </button>
+                </div>
+
+                <input type="hidden" name="{{ _name }}[contents]" value="" />
+
+                {% for content in header.contents %}
+                    {% include '@header/expand.html.twig' with {
+                        'fieldname': name,
+
+                        'id': id,
+                        'mode': content|keys|first,
+                        'value': content|first,
+
+                        'logos': logos,
+                        'navs': navs,
+                        'searchs': searchs,
+                        'types': types,
+
+                        't_addblock_label': t_addblock_label,
+                        't_editblock_label': t_editblock_label,
+                        't_removeblock_label': t_removeblock_label,
+                    } only %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <script>
+            (function($) {
+                $(document).ready(function() {
+                    $("#{{ identifier }}-header").dionysosHeader({
+                        elements: '.zeus-cols',
+                        item: '.zeus-col',
+
+                        sources: {
+                            block: '{{ identifier }}-item',
+                            logo: '{{ identifier }}-logo',
+                            nav: '{{ identifier }}-nav',
+                            search: '{{ identifier }}-search',
+                            text: '{{ identifier }}-text',
+                        }
+                    });
+                });
+            })(jQuery);
+        </script>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script type="text/html" id="tmpl-{{ identifier }}-item">
+        {% include '@header/expand.html.twig' with {
+            'fieldname': name,
+
+            'logos': logos,
+            'navs': navs,
+            'searchs': searchs,
+            'types': types,
+
+            't_addblock_label': t_addblock_label,
+            't_editblock_label': t_editblock_label,
+            't_removeblock_label': t_removeblock_label,
+        } only %}
+    </script>
+    <script type="text/html" id="tmpl-{{ identifier }}-logo">
+        {% include '@header/content-logo.html.twig' with {
+            'logos': logos,
+        } only %}
+    </script>
+    <script type="text/html" id="tmpl-{{ identifier }}-nav">
+        {% include '@header/content-nav.html.twig' with {
+            'navs': navs,
+        } only %}
+    </script>
+    <script type="text/html" id="tmpl-{{ identifier }}-search">
+        {% include '@header/content-search.html.twig' with {
+            'searchs': searchs,
+        } only %}
+    </script>
+    <script type="text/html" id="tmpl-{{ identifier }}-text">
+        {% include '@header/content-text.html.twig' with {} only %}
+    </script>
+{% endblock %}
+
+{% block description %}
+    {{ description|raw }}
+{% endblock %}

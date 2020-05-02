@@ -1,0 +1,37 @@
+{
+    "header.title": "Header",
+
+    "header.align_left": "Left",
+    "header.align_center": "Center",
+    "header.align_right": "Right",
+    "header.align_expand": "Expend",
+
+    "header.header_overall": "Overall header",
+    "header.header_main": "Main header",
+    "header.header_secondary": "Secondary header",
+
+    "header.logo_no_display": "Hide website's baseline",
+    "header.logo_display": "Display website's baseline",
+
+    "header.navs_label": "Navigation menus",
+
+    "header.search_label": "Search displays",
+    "header.search_default": "Default",
+    "header.search_drop": "Drop",
+    "header.search_dropdown": "Dropdown",
+    "header.search_modal": "Modal",
+    "header.search_overlay": "Overlay",
+
+    "header.text_default": "Call us today! 1.555.555.555",
+
+    "header.type_label": "Choose a content type",
+    "header.type_logo": "Website's logo",
+    "header.type_nav": "Navigation menu",
+    "header.type_search": "Search form",
+    "header.type_text": "Custom text field",
+
+    "header.addblock_label": "Click on the button to add content",
+    "header.editblock_label": "Click on the button to edit content",
+    "header.removeblock_label": "Remove",
+    "header.updateblock_label": "Update"
+}

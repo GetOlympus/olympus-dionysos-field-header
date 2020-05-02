@@ -1,0 +1,8 @@
+{% set _name  = name is defined ? name ~ '[nav]' : '{{ data.name }}[nav]' %}
+{% set _value = value is defined ? value : '' %}
+    
+<select name="{{ _name }}">
+    {% for n, nav in navs %}
+        <option value="{{ n }}"{{ _value == n ? ' selected' : '' }}>{{ nav }}</option>
+    {% endfor %}
+</select>

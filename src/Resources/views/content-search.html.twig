@@ -1,0 +1,8 @@
+{% set _name  = name is defined ? name ~ '[search]' : '{{ data.name }}[search]' %}
+{% set _value = value is defined ? value : '' %}
+
+<select name="{{ _name }}">
+    {% for s, search in searchs %}
+        <option value="{{ s }}"{{ _value == s ? ' selected' : '' }}>{{ search }}</option>
+    {% endfor %}
+</select>

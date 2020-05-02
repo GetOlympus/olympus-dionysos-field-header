@@ -1,0 +1,4 @@
+{% set _name  = name is defined ? name ~ '[text]' : '{{ data.name }}[text]' %}
+{% set _value = value is defined ? value : '' %}
+
+<input type="text" name="{{ _name }}" value="{{ _value }}" class="large-text" />
