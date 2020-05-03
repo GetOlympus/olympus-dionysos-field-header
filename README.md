@@ -150,6 +150,7 @@ if (!empty($headers)) {
 
 | Version | Note |
 | :------ | :--- |
+| 0.0.2   | Update CSS and languages |
 | 0.0.1   | Initial commit |
 
 ## Contributing
